@@ -31,17 +31,24 @@ const PassGenerator = () => {
     // 生成随机密码的函数
     const generatePassword = () => {
         const symbols = "!@#$%^&*()_+{}|[]\\:;\"'<>,.?/~";
+        const numbers = '0123456789';
         let chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-        let numbers = '0123456789';
-        if (checkedList.includes('符号')) chars += symbols;
-        if (checkedList.includes('数字')) chars += numbers;
+
+        if (checkedList.includes('符号')) {
+            chars += symbols;
+        }
+        if (checkedList.includes('数字')) {
+            chars += numbers;
+        }
 
         let password = '';
+        const availableChars = chars.length;
         for (let i = 0; i < passNumber; i++) {
-            password += chars.charAt(Math.floor(Math.random() * chars.length));
+            const randomIndex = Math.floor(Math.random() * availableChars);
+            password += chars.charAt(randomIndex);
         }
+
         setGeneratedPasswd(password);
-        console.log("passwd:", password)
     };
 
     //生成PIN密码
